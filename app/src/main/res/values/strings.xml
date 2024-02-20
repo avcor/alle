@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Alle</string>
+    <string name="rational_text">This app needs access to your storage so that you can view images.</string>
+    <string name="declined_text">It seems you permanently declined storage permission. You can go to the app settings to grant it.</string>
+</resources>
