@@ -59,7 +59,7 @@ fun CarouselList(imagesList: List<Uri>, fn: (num: Int) -> Unit) {
         LazyRow(
             state = scrollState,
             contentPadding = PaddingValues(horizontal = screenMid - 10.dp),
-            horizontalArrangement = Arrangement.spacedBy(2.dp),
+            horizontalArrangement = Arrangement.spacedBy(0.dp),
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .fillMaxWidth(1f)
