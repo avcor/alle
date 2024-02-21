@@ -19,26 +19,19 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.layout.LayoutCoordinates
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.Density
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
-import com.example.alle.LocalImageResponse
-import com.example.alle.calculate
-import com.example.alle.ui.theme.AlleTheme
+import com.example.alle.calculateOnRedMark
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
-fun CarouselList(imagesList: List<Uri>, fn: (num: Int) -> Unit) {
+fun CarouselList(imagesList: List<Uri>, fnOnRedMark: (num: Int) -> Unit) {
 
     Box(
         modifier = Modifier
@@ -65,14 +58,14 @@ fun CarouselList(imagesList: List<Uri>, fn: (num: Int) -> Unit) {
                 .fillMaxWidth(1f)
         ) {
             items(imagesList.size) { index ->
-                var bool = remember { mutableStateOf(true) }
+                val bool = remember { mutableStateOf(true) }
 
                 Box(modifier = Modifier
                     .width(60.dp)
                     .onGloballyPositioned {
-                        val b = calculate(density, screenMid, it)
-                        bool.value = b;
-                        if (b) fn(index)
+                        val b = calculateOnRedMark(density, screenMid, it)
+                        bool.value = b
+                        if (b) fnOnRedMark(index)
                     }
                     .clickable {
                         scrollToIndex.value = index

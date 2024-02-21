@@ -17,22 +17,11 @@ fun Activity.openAppSettings() {
     ).also(::startActivity)
 }
 
-fun calculate(density: Density, screenMid: Dp, coordinates: LayoutCoordinates): Boolean {
-    var dpFromStart = 0.dp
-    var dpFromEnd = 0.dp
+fun calculateOnRedMark(density: Density, screenMid: Dp, coordinates: LayoutCoordinates): Boolean {
 
     val densityValue = density.density
     val pxFromStart = coordinates.localToRoot(Offset(0f, 0f)).x
-    val pxFromEnd = with(density) {
-        coordinates.localToRoot(
-            Offset(
-                0f,
-                0f
-            )
-        ).x + coordinates.size.width
-    }
-    dpFromStart = (pxFromStart / densityValue).dp
-    dpFromEnd = (pxFromEnd / densityValue).dp
+    val dpFromStart = (pxFromStart / densityValue).dp
 
     val e = dpFromStart + 60.dp
     val s = dpFromStart
