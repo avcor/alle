@@ -27,11 +27,10 @@ import com.example.alle.permission.ui.RequestMyPermission
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 
 
-
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?){
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContent {
@@ -40,17 +39,15 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background
                 ) {
                     val galleryViewModel: GalleryViewModel = viewModel()
+                    val preBuildImage = galleryViewModel.fixedLimitStack
                     val imageStateList = galleryViewModel.imagesLiveData.collectAsState()
                     val selectedImage = galleryViewModel.selectedImage.collectAsState()
                     var imagesList: List<Uri> = listOf()
-                    if(imageStateList.value is LocalImageResponse.Success){
+                    if (imageStateList.value is LocalImageResponse.Success) {
                         imagesList = (imageStateList.value as LocalImageResponse.Success).list
                     }
 
-                    SelectedImage(
-                        selectedImage.value,
-
-                    )
+                    SelectedImage(selectedImage.value, preBuildImage)
 
                     Box(
                         modifier = Modifier
@@ -58,8 +55,8 @@ class MainActivity : ComponentActivity() {
                             .padding(bottom = 18.dp),
                         contentAlignment = Alignment.BottomEnd
                     ) {
-                        CarouselList(imagesList) { num ->
-                            galleryViewModel.setSelectedImage(imagesList[num])
+                        CarouselList(imagesList, preBuildImage) { uri ->
+                            galleryViewModel.setSelectedImage(uri)
                         }
                     }
 

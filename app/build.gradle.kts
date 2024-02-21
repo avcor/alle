@@ -87,4 +87,6 @@ dependencies {
     implementation ("com.github.skydoves:cloudy:0.1.2")
     implementation ("com.google.accompanist:accompanist-permissions:0.24.9-beta")
 
+    implementation ("io.coil-kt:coil-compose:2.5.0")
+
 }
